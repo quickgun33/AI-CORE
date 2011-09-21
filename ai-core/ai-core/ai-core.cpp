@@ -8,7 +8,7 @@ AiManager::AiManager(int id):BaseGameEntity(id)
 		cout << "Creating State machine.\n";
 		m_pStateMachine = new StateMachine<AiManager>(this);
 	}
-
+//here is jamies first comment
 void AiManager::Update(int f, int b, int l, int r, Vector3D pos, bool vis)
 {
 	magF = f;
