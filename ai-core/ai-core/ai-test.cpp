@@ -11,6 +11,13 @@ int main ()
 			Warren.Update(1,2,3,4,vec,true);
 			Sleep(800);
 	}
+	
+	int AvoidArray[] = {(1,0,2),(5,0,7),(4,0,3),(7,0,0),(0,0,9),(3,0,6),(9,0,1)};
+	Warren.ReadAvoidArray(AvoidArray);
+	int i = 0;
+	if (i < sizeof AvoidArray[]) 
+		{i++;}
+
 	return 0;
 }
 
