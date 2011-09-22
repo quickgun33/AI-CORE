@@ -8,7 +8,9 @@ AiManager::AiManager(int id):BaseGameEntity(id)
 		cout << "Creating State machine.\n";
 		m_pStateMachine = new StateMachine<AiManager>(this);
 	}
-//here is jamies first comment
+
+//AiManager is calling for an update to determine if the player's position is known, 
+//if they are in the line of sight, and how many available floor spaces are in each direction
 void AiManager::Update(int f, int b, int l, int r, Vector3D pos, bool vis)
 {
 	magF = f;
