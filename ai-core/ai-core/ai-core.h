@@ -21,6 +21,7 @@ private:
 	State<AiManager>*			m_pGlobalState;
 	StateMachine<AiManager>*	m_pStateMachine;
 
+	//Enemy Bot's location, facing and velocity
 	Vector3D					location;
 	Vector3D					facing;
 	Vector3D					velocity;
