@@ -121,26 +121,28 @@ void AiAvoid::Enter(AiManager* aimanager)
 {
 	// AiAvoid is called 
 	cout << "AiAvoid::Enter()\n";
-	//Creating variables
-	const int MAX_OBSTACLES = 20;
-	AiAvoid obstacle[MAX_OBSTACLES];
-	obstacle = [(x,y,z)];
+	
 }
 void AiAvoid::Execute(AiManager* aimanager)
 {
 	// put code here
 		cout << "AiAvoid::Execute()\n";
+		//Creating variables
+		int x = 0;
+		int y = 0;
+		int z = 0;
+		int obstacle[20] = {(x,y,z)};
 		//create array of obstacles that the bot will avoid, and a counter
 		//to count how many obstacles are in the array 
 		int obs = 0;
 		obstacle[obs++];
-		for (int i = 0; i < obs; ++i)
-
-		aimanager->GetLocation();
-		if (Location = obstacle[])
-			aimanager->GetFSM()->ChangeState(AiEvade::Instance());
-		else 
-			aimanager->GetFSM()->ChangeState(AiExplore::Instance());
+		for (int i = 0; i < obs; ++i);
+		//If the bot is near one of the variables in the obstacle array, change state to evade
+		if (aimanager->GetLocation() = obstacle[])
+			{aimanager->GetFSM()->ChangeState(AiEvade::Instance());}
+		//If the bot is not near one of the variables in the obstacle array, change state to evade
+		if (aimanager->GetLocation() != obstacle[])
+			{aimanager->GetFSM()->ChangeState(AiExplore::Instance());}
 }
 void AiAvoid::Exit(AiManager* aimanager)
 {
