@@ -21,10 +21,12 @@ private:
 	State<AiManager>*			m_pGlobalState;
 	StateMachine<AiManager>*	m_pStateMachine;
 
-	//Enemy Bot's location, facing and velocity
+	//Enemy Bot's location, facing, and velocity
 	Vector3D					location;
 	Vector3D					facing;
 	Vector3D					velocity;
+	//Avoid array's size allowing array to be dynamic
+	int							length;
 	//update() world information
 	int							magF, magB, magL, magR;
 	Vector3D					playerPos;
@@ -41,6 +43,8 @@ public:
 	void Update(void);
 
 	void SetStateExplore(void);
+	// Avoid Array prototype declaration
+	int ReadAvoidArray(int AvoidArray[], int numObs);
 
 	StateMachine<AiManager>*  GetFSM()const{return m_pStateMachine;}
 
@@ -53,10 +57,12 @@ public:
 	int GetMagB() {return magB;}
 	int GetMagL() {return magL;}
 	int GetMagR() {return magR;}
+	int GetLength() {return length;}
 	State<AiManager>* GetPrevious() {return m_pPreviousState;}
 
 	//set velocity
 	void SetVelocity(Vector3D vel) {velocity = vel;}
+
 	
 	~AiManager(){delete m_pStateMachine;}
 };

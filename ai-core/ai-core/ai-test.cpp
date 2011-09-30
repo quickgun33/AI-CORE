@@ -12,11 +12,22 @@ int main ()
 			Sleep(800);
 	}
 	
-	int AvoidArray[] = {(1,0,2),(5,0,7),(4,0,3),(7,0,0),(0,0,9),(3,0,6),(9,0,1)};
-	Warren.ReadAvoidArray(AvoidArray);
-	int i = 0;
+	Vector3D AvoidArray[500];
+
+	int AvoidArray[int length] = {(1,0,2),(5,0,7),(4,0,3),(7,0,0),(0,0,9),(3,0,6),(9,0,1)};
+	Warren.ReadAvoidArray(AvoidArray[],length);
+	int i;
+	i = length
 	if (i < sizeof AvoidArray[]) 
-		{i++;}
+		{
+			i++;
+			return AvoidArray[i];
+		}
+	else 
+	{
+		break;
+	}
+
 
 	return 0;
 }

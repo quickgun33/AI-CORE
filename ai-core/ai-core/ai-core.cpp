@@ -34,10 +34,12 @@ void AiManager::SetStateExplore()
 	m_pStateMachine->SetCurrentState(AiExplore::Instance());
 }
 
-void AiManager::ReadAvoidArray(int *&AvoidArray, Vector3D length)
+int AiManager::ReadAvoidArray(int AvoidArray[], int numObs)
 {
-	sizeof (AvoidArray) = length;
-	int* pointer = new int[length];
+	for(int i = 0; i< numObs; i++)
+	{ 
+		AvoidArray[i];
+	}
 
 	cout<< "AiManager::ReadAvoidArray() \n";
 	m_pStateMachine->SetCurrentState(AiAvoid::Instance());
