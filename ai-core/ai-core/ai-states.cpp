@@ -3,6 +3,7 @@
 #include "ai-core.h"
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 // AiChase
@@ -22,29 +23,13 @@ void AiChase::Execute(AiManager* aimanager)
 {
 	// put code here
 	cout << "AiChase::Execute()\n";
-	bool x =false, z = false;
-	Vector3D chaseVel;
 
+	//if the player is visible, increase velocity to 2 in the player direction
+	//else go back to exploring
 	if(aimanager->GetLocation() != aimanager->GetPlayerPos() && aimanager->GetVisible() == true)
-	{
-		if(aimanager->GetPlayerPos().x != aimanager->GetLocation().x)
-		{
-			chaseVel.x = 2;
-			aimanager->SetVelocity(chaseVel);
-		}
-		else
-		{
-			chaseVel.z = 2;
-			aimanager->SetVelocity(chaseVel);
-		}
-	}
+		aimanager->SetVelocity(2);
 	else
-    //
-	// This code will not work
-	//aimanager->GetFSM()->ChangeState(aimanager->GetPrevious());
-	//
-	// This code works...
-	aimanager->GetFSM()->ChangeState(AiExplore::Instance());
+		aimanager->GetFSM()->ChangeState(AiExplore::Instance());
 
 }
 void AiChase::Exit(AiManager* aimanager)
@@ -69,8 +54,11 @@ void AiExplore::Enter(AiManager* aimanager)
 }
 void AiExplore::Execute(AiManager* aimanager)
 {
-	// put code here
+	//Runs wall avoid (hugs right wall) and wanders
 		cout << "AiExplore::Execute()\n";
+		aimanager->WallAvoid();
+		aimanager->SetVelocity(1);
+
 		if(aimanager->GetVisible() == true)
 			aimanager->GetFSM()->ChangeState(AiChase::Instance());
 
@@ -98,8 +86,25 @@ void AiEvade::Enter(AiManager* aimanager)
 void AiEvade::Execute(AiManager* aimanager)
 {
 	// put code here
-		cout << "AiEvade::Execute()\n";
-		aimanager->GetFSM()->ChangeState(AiAvoid::Instance());
+	cout << "AiChase::Execute()\n";
+
+	//if the player is seen, run away
+	//else go back to exploring
+	if(aimanager->GetLocation() != aimanager->GetPlayerPos() && aimanager->GetVisible() == true)
+	{
+		//set velocity negative to player direction
+		aimanager->SetVelocity(-2);
+		//run custom wall avoidance for when it hits a wall running away
+		if(aimanager->GetMagB() == 0)
+		{
+			if(aimanager->GetMagL() > 0)
+				aimanager->SetFacing(270);
+			else if(aimanager->GetMagR() > 0)
+				aimanager->SetFacing(90);
+		}
+	}
+	else
+		aimanager->GetFSM()->ChangeState(AiExplore::Instance());
 
 }
 void AiEvade::Exit(AiManager* aimanager)
@@ -119,21 +124,14 @@ AiAvoid* AiAvoid::Instance()
 void AiAvoid::Enter(AiManager* aimanager)
 
 {
-	// AiAvoid is called 
+	// put code here
 	cout << "AiAvoid::Enter()\n";
-	
 }
 void AiAvoid::Execute(AiManager* aimanager)
 {
 	// put code here
 		cout << "AiAvoid::Execute()\n";
-		
-		//If the bot is near one of the variables in the obstacle array, change state to evade
-		if (aimanager->GetLocation() = AvoidArray[])
-			{aimanager->GetFSM()->ChangeState(AiEvade::Instance());}
-		//If the bot is not near one of the variables in the obstacle array, change state to evade
-		if (aimanager->GetLocation() != AvoidArray[])
-			{aimanager->GetFSM()->ChangeState(AiExplore::Instance());}
+		aimanager->GetFSM()->ChangeState(AiFollowPath::Instance());
 }
 void AiAvoid::Exit(AiManager* aimanager)
 {
