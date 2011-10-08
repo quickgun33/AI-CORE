@@ -1,4 +1,5 @@
 #include "ai-core.h"
+#include <vector>
 
 #define _DEBUG_
 using namespace std;
@@ -152,7 +153,7 @@ void AiManager::AddAvoidObstacle(Point3D, obstacleLocation)
       avoid=obstacleLocation[i];
    cout << " " << avoid.x ;
    cout << " " << avoid.y ;
-   cout << " " << avoid.z;
+   cout << " " << avoid.z ;
    cout << endl;
   }
 }

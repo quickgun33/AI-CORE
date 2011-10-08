@@ -283,14 +283,19 @@ public:
 		SetVelocity(vel);
 		aggressive = aggro;
 	}
+
 	//Creates  3D vector for both Avoid and FollowPath arrays
-	struct Point3D
+    struct Point3D
     {
         float x;
         float y;
         float z;
     };
+    //Like this
     
+    vector<Point3D> wayPointArray;
+    vector<Point3D> obstacleLocationArray;
+
     void AddWayPoint(Point3D wayPoint);
     // void AddWayPoint(Point3D wayPoint)
     /*  Inputs: Point3D waypoint
@@ -303,6 +308,8 @@ public:
         Inputs: Point3d obstacleLocation
         Outputs: N/A
         General Operation: Adds the location of an obstacle to avoid (x,y,z) */
+
+
 
 
 

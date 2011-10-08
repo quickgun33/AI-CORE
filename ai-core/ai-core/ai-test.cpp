@@ -1,4 +1,5 @@
 #include "ai-core.h"
+#include <vector>
 
  int main ()  
 { 
@@ -33,25 +34,22 @@
 	// Warren.SetStateAvoid();
 
 	//Code Added by Jamie Hoseit
-	vector<Point3D> AddAvoidObstacle;
-    vector<Point3D> AddWayPoints;
 
-    Point3D avoid;
-    Point3D follow;
-
-    Warren.AddAvoidObstacle(avoid);
+	Point3D avoid3DPoint;
+    Point3D follow3DPoint;
+    Warren.AddAvoidObstacle(avoid3DPoint);
 
     avoid.x = 2.0;
     avoid.y = 0.0;
     avoid.z = 5.2;
 
-    obstacleLocation.push_back(avoid);
+    obstacleLocation.push_back(avoid3DPoint);
 
     avoid.x = 6.9;
     avoid.y = 0.0;
     avoid.z = 4.8;
 
-    obstacleLocation.push_back(avoid);
+    obstacleLocation.push_back(avoid3DPoint);
     
 
     Warren.AddWayPoint(follow);
@@ -60,14 +58,15 @@
     follow.y = 0.0;
     follow.z = 1.2;
 
-    wayPoint.push_back(follow);
+    wayPoint.push_back(follow3DPoint);
 
     follow.x = 1.2;
     follow.y = 0.0;
     follow.z = 3.0;
 
-    wayPoint.push_back(follow);
+    wayPoint.push_back(follow3DPoint);
     //End of Jamie Hoseit's code
+
 
 
 	// Normally this would be some sort of almost infinite loop
