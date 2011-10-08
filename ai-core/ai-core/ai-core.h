@@ -285,30 +285,31 @@ public:
 	}
 	//Creates  3D vector for both Avoid and FollowPath arrays
 	struct Point3D
-	{
-		float x;
-		float y;
-		float z;
-	};
-	
-	void AddWayPoint(Point3D wayPoint);
-	// void AddWayPoint(Point3D wayPoint)
-	/*	Inputs: Point3D waypoint
-		Outputs: N/A
-		General Operation: Adds a waypoint (x,y,z) to the WayPointArray*/
+    {
+        float x;
+        float y;
+        float z;
+    };
+    
+    void AddWayPoint(Point3D wayPoint);
+    // void AddWayPoint(Point3D wayPoint)
+    /*  Inputs: Point3D waypoint
+        Outputs: N/A
+        General Operation: Adds a waypoint (x,y,z) to the WayPointArray*/
 
-	void AddAvoidObstacle(Point3D obstacleLocation);
-	// AddAvoidObstacle(Point3d obstacleLocation)
-	/*
-		Inputs: Point3d obstacleLocation
-		Outputs: N/A
-		General Operation: Adds the location of an obstacle to avoid (x,y,z) */
+    void AddAvoidObstacle(Point3D obstacleLocation);
+    // AddAvoidObstacle(Point3d obstacleLocation)
+    /*
+        Inputs: Point3d obstacleLocation
+        Outputs: N/A
+        General Operation: Adds the location of an obstacle to avoid (x,y,z) */
+
 
 
 
 	/*~AiManager(void)
 	Inputs: N/A
-	Outputs: N/A
+	Outputs: N/A                            
 	General Operation: Deconstructor*/
 	~AiManager(){delete m_pStateMachine;}
 };

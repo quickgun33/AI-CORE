@@ -123,14 +123,15 @@ void AiManager::SetStateFollowPath()
 	m_pStateMachine->SetCurrentState(AiFollowPath::Instance());
 }
 
-void AiManager::AddWayPoint(Point3D WayPoint)
+void AiManager::AddWayPoint(Point3D wayPoint)
 {
-	WayPoint.push_back(follow);
-	//cout << "WayPoint contains:";
+    Point3D follow;
+    wayPoint.push_back(follow);
+    //cout << "WayPoint contains:";
   for (int i=0; i<WayPoint.size(); i++)
   {
     cout << "Element "<< i <<endl;
-      follow=WayPoint[i];
+      follow=wayPoint[i];
    cout << " " << follow.x ;
    cout << " " << follow.y ;
    cout << " " << follow.z;
@@ -139,19 +140,21 @@ void AiManager::AddWayPoint(Point3D WayPoint)
 
 }
 
-void AiManager::AddAvoidObstacle(Point3D, AvoidObstacles)
+void AiManager::AddAvoidObstacle(Point3D, obstacleLocation)
 {
-	AvoidObstactle.push_back(avoid);
+    Point3D avoid;
+    obstacleLocation.push_back(avoid);
 
-	//cout << "AvoidObstacles contains:";
-  for (int i=0; i<AvoidObstacles.size(); i++)
+    //cout << "AvoidObstacles contains:";
+  for (int i=0; i<obstacleLocation.size(); i++)
   {
     cout << "Element "<< i <<endl;
-      avoid=AvoidObstacles[i];
+      avoid=obstacleLocation[i];
    cout << " " << avoid.x ;
    cout << " " << avoid.y ;
    cout << " " << avoid.z;
    cout << endl;
   }
+}
 
 }
