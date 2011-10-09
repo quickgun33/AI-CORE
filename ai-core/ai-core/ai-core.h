@@ -3,15 +3,22 @@
 
 #include <iostream>
 #include <math.h>
+#include <string>
+#include <vector>
 
 #include "Vector3d.h"
 #include "StateMachine.h"
 #include "BaseGameEntity.h"
 #include "ai-states.h"
-#include <vector>
-#include <string>
-#include <cstdio>
-#include <cstdlib>
+
+
+struct Point3D
+    {
+        float x;
+        float y;
+        float z;
+    };
+
 
 // Name of AiManager Class
 class AiManager : public BaseGameEntity
@@ -92,6 +99,13 @@ private:
 	// Whether or not the bot can see the player. If the player is in the bot’s line-of-sight, this should be set to true.
 	// Used to switch between Explore and Chase/Evade states.
 	bool visible;
+
+	//
+	// "Smart" Arrays to hold way points and obtacles to avoid
+	//
+	vector<Point3D> wayPointArray;
+	vector<Point3D> obstacleLocationArray;
+
 
 	
 	// Declare Public Methods
@@ -283,40 +297,44 @@ public:
 		SetVelocity(vel);
 		aggressive = aggro;
 	}
+	
+	void AddWayPoint(Point3D wayPoint);
+	// void AddWayPoint(Vector3D wayPoint)
+	/*	Inputs: Vector3D waypoint
+		Outputs: N/A
+		General Operation: Adds a waypoint (x,y,z) to the WayPointArray*/
 
-	//Creates  3D vector for both Avoid and FollowPath arrays
-    struct Point3D
-    {
-        float x;
-        float y;
-        float z;
-    };
-    //Like this
-    
-    vector<Point3D> wayPointArray;
-    vector<Point3D> obstacleLocationArray;
+	void AddAvoidObstacle(Point3D obstacleLocation);
+	// AddAvoidObstacle(Vector3d obstacleLocation)
+	/*
+		Inputs: Vector3d obstacleLocation
+		Outputs: N/A
+		General Operation: Adds the location of an obstacle to avoid (x,y,z) */
 
-    void AddWayPoint(Point3D wayPoint);
-    // void AddWayPoint(Point3D wayPoint)
-    /*  Inputs: Point3D waypoint
-        Outputs: N/A
-        General Operation: Adds a waypoint (x,y,z) to the WayPointArray*/
+	int GetObstacleCount()
+	{
+		return obstacleLocationArray.size();
+	}
 
-    void AddAvoidObstacle(Point3D obstacleLocation);
-    // AddAvoidObstacle(Point3d obstacleLocation)
-    /*
-        Inputs: Point3d obstacleLocation
-        Outputs: N/A
-        General Operation: Adds the location of an obstacle to avoid (x,y,z) */
+	Point3D GetObstacleLocation(int number)
+	{
+		return obstacleLocationArray[number];
+	}
+//
 
+		int GetWayPointCount()
+	{
+		return wayPointArray.size();
+	}
 
-
-
-
+	Point3D GetWayPointLocation(int number)
+	{
+		return wayPointArray[number];
+	}
 
 	/*~AiManager(void)
 	Inputs: N/A
-	Outputs: N/A                            
+	Outputs: N/A
 	General Operation: Deconstructor*/
 	~AiManager(){delete m_pStateMachine;}
 };

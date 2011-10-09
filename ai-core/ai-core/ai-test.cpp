@@ -1,21 +1,19 @@
 #include "ai-core.h"
-#include <vector>
 
- int main ()  
-{ 
+int main () 
+{
+	// Create a vector for Bot to Spawn
+	Vector3D botVec(1.0, 0.0, 3.0);
+	// Create a velocity for the Bot to be moving when it spawns
+	double botVel = 1.0;
+	// Create a direction for the bot to be facing
+	double facing = 90;
+	// Set bot to aggressive 1 or not aggressive 0
+	bool aggressive = 1;
 
-	// Create a vector for Bot to Spawn 
-	Vector3D botVec(1.0, 0.0, 3.0); 
-	// Create a velocity for the Bot to be moving when it spawns 
-	double botVel = 1.0; 
-	// Create a direction for the bot to be facing 
-	double facing = 90; 
-	// Set bot to aggressive 1 or not aggressive 0 
-	bool aggressive = 1; 
- 
-	// Create a location for the player 
-	Vector3D vec(0.0, 0.0, 0.0); 
-	
+	// Create a location for the player
+	Vector3D vec(0.0, 0.0, 0.0);
+	//
 	// Instantiate an AiManager bot named Warren with an ID of 1
 	//
 	AiManager Warren(1);
@@ -33,46 +31,47 @@
 	// Warren.SetStateFollowPath();
 	// Warren.SetStateAvoid();
 
-	//Code Added by Jamie Hoseit
+	Point3D me;
+	me.x=1.2;
+	me.y=2.4;
+	me.z=3.5;
+	Warren.AddAvoidObstacle(me);
 
-	Point3D avoid3DPoint;
-    Point3D follow3DPoint;
-    Warren.AddAvoidObstacle(avoid3DPoint);
+	me.x=4.1;
+	me.y=5.2;
+	me.z=6.3;
+	Warren.AddAvoidObstacle(me);
 
-    avoid.x = 2.0;
-    avoid.y = 0.0;
-    avoid.z = 5.2;
+	me.x=9.0;
+	me.y=7.7;
+	me.z=8.6;
+	Warren.AddAvoidObstacle(me);
 
-    obstacleLocation.push_back(avoid3DPoint);
+	Warren.SetStateAvoid();
+	Warren.Update(0,0,0,0,vec,false);
+//
+	me.x=9.9;
+	me.y=0.0;
+	me.z=10.23;
+	Warren.AddWayPoint(me);
 
-    avoid.x = 6.9;
-    avoid.y = 0.0;
-    avoid.z = 4.8;
+	me.x=10.71;
+	me.y=0.0;
+	me.z=33.33;
+	Warren.AddWayPoint(me);
 
-    obstacleLocation.push_back(avoid3DPoint);
-    
+	me.x=0.0;
+	me.y=0.0;
+	me.z=0.0;
+	Warren.AddWayPoint(me);
 
-    Warren.AddWayPoint(follow);
-
-    follow.x = 9.1;
-    follow.y = 0.0;
-    follow.z = 1.2;
-
-    wayPoint.push_back(follow3DPoint);
-
-    follow.x = 1.2;
-    follow.y = 0.0;
-    follow.z = 3.0;
-
-    wayPoint.push_back(follow3DPoint);
-    //End of Jamie Hoseit's code
-
-
-
+	Warren.SetStateFollowPath();
+	Warren.Update(0,0,0,0,vec,false);
+	//
 	// Normally this would be some sort of almost infinite loop
 	// This runs through 20 times, and calls update
 	//
-	for (int i=0; i<20; ++i)
+	/*for (int i=0; i<20; ++i)
 	{
 		//
 		// The Instantiation of AiManager called Warren
@@ -87,6 +86,6 @@
 		Warren.Update(1,2,3,4,vec,true);
 
 	}
-
+	*/
 	return 0;
 }

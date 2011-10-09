@@ -1,5 +1,4 @@
 #include "ai-core.h"
-#include <vector>
 
 #define _DEBUG_
 using namespace std;
@@ -117,45 +116,31 @@ void AiManager::SetStateAvoid()
 Inputs: N/A
 Outputs: N/A
 General Operation: Sets bot state to FollowPath*/
-
-
 void AiManager::SetStateFollowPath()
 {
 	m_pStateMachine->SetCurrentState(AiFollowPath::Instance());
 }
 
+// void AiManager::AddWayPoint(Vector3D wayPoint)
+/*	Inputs: Vector3D waypoint
+	Outputs: N/A
+	General Operation: Adds a waypoint (x,y,z) to the WayPointArray*/
 void AiManager::AddWayPoint(Point3D wayPoint)
 {
-    Point3D follow;
-    wayPoint.push_back(follow);
-    //cout << "WayPoint contains:";
-  for (int i=0; i<WayPoint.size(); i++)
-  {
-    cout << "Element "<< i <<endl;
-      follow=wayPoint[i];
-   cout << " " << follow.x ;
-   cout << " " << follow.y ;
-   cout << " " << follow.z;
-   cout << endl;
-  }
-
+#ifdef _DEBUG_
+	cout << "Adding a 3D way point x=" << wayPoint.x << " y=" << wayPoint.y << " z=" << wayPoint.z << "\n";
+#endif
+    wayPointArray.push_back(wayPoint);
 }
 
-void AiManager::AddAvoidObstacle(Point3D, obstacleLocation)
+// AiManager::AddAvoidObstacle(Vector3d obstacleLocation)
+/*	Inputs: Vector3d obstacleLocation
+	Outputs: N/A
+	General Operation: Adds the location of an obstacle to avoid (x,y,z) */
+void AiManager::AddAvoidObstacle(Point3D obstacleLocation)
 {
-    Point3D avoid;
-    obstacleLocation.push_back(avoid);
-
-    //cout << "AvoidObstacles contains:";
-  for (int i=0; i<obstacleLocation.size(); i++)
-  {
-    cout << "Element "<< i <<endl;
-      avoid=obstacleLocation[i];
-   cout << " " << avoid.x ;
-   cout << " " << avoid.y ;
-   cout << " " << avoid.z ;
-   cout << endl;
-  }
-}
-
+#ifdef _DEBUG_
+	cout << "Adding a object 3D point x=" << obstacleLocation.x << " y=" << obstacleLocation.y << " z=" << obstacleLocation.z << "\n";
+#endif
+    obstacleLocationArray.push_back(obstacleLocation);
 }
