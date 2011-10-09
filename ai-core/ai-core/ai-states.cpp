@@ -156,6 +156,7 @@ void AiAvoid::Enter(AiManager* aimanager)
 void AiAvoid::Execute(AiManager* aimanager)
 {
 #ifdef _DEBUG_
+	{
 	cout << "AiAvoid::Execute()\n";
 	Point3D temp;
 	for (int i=0; i<aimanager->GetObstacleCount(); i++)
@@ -302,6 +303,7 @@ void AiFollowPath::Execute(AiManager* aimanager)
 
 	}
 }
+
 void AiFollowPath::Exit(AiManager* aimanager)
 {
 	// put code here
