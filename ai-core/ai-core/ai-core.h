@@ -320,9 +320,45 @@ public:
 	{
 		return obstacleLocationArray[number];
 	}
-//
 
-		int GetWayPointCount()
+	//Gets the next obstacleLocation and determines what to do with it
+	int GetNextObstacleLocation()
+	{
+		int obstacleMaxSize = GetObstacleCount();
+		int currentObstacle = 0;
+		Point3D targetLocation;
+		int obstacleDirection = 1;
+
+		currentObstacle = currentObstacle + obstacleDirection;
+		if (currentObstacle ==1)
+		{
+			if (currentObstacle < obstacleMaxSize)
+			{
+				return obstacleLocationArray[currentObstacle];
+			}
+			else
+			{
+				obstacleDirection =-1;
+				currentObstacle = currentObstacle + obstacleDirection;
+			}
+		}
+		else
+		{
+			if (obstacleDirection == 1)
+			{
+				return obstacleLocationArray[currentObstacle];
+			}
+			else
+			{
+				obstacleDirection =1;
+				currentObstacle = currentObstacle + obstacleDirection;
+			}
+		}
+
+		targetLocation = GetObstacleLocation(currentObstacle);
+	}
+
+	int GetWayPointCount()
 	{
 		return wayPointArray.size();
 	}
@@ -330,6 +366,44 @@ public:
 	Point3D GetWayPointLocation(int number)
 	{
 		return wayPointArray[number];
+	}
+
+	//Gets the next vector and determines what to do with it
+	int GetNextWayPoint()
+	{
+		int wayPointMaxSize = GetWayPointCount();
+		int currentWayPoint = 0;
+		Point3D targetLocation;
+		int wayPointDirection = 1;
+
+		currentWayPoint = currentWayPoint + wayPointDirection;
+		if (currentWayPoint ==1)
+		{
+			if (currentWayPoint < wayPointMaxSize)
+			{
+				return wayPointArray[currentWayPoint];
+			}
+			else
+			{
+				wayPointDirection =-1;
+				currentWayPoint = currentWayPoint + wayPointDirection;
+			}
+		}
+		else
+		{
+			if (wayPointDirection == 1)
+			{
+				return waypointArray[currentWaypoint];
+			}
+			else
+			{
+				wayPointDirection =1;
+				currentWayPoint = currentWayPoint + wayPointDirection;
+			}
+		}
+
+		targetLocation = GetWayPointLocation(currentWayPoint);
+
 	}
 
 	/*~AiManager(void)

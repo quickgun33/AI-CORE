@@ -170,49 +170,9 @@ void AiAvoid::Execute(AiManager* aimanager)
 		cout << "\n\n";
 #endif
 	}
+	}
 
 	// put code here/ fix this code so that it is avoid and not follow point
-	int obstacleMaxSize = aimanager->GetObstacleCount();
-	int currentObstacle = 0;
-	Point3D targetLocation;
-	int obstacleDirection = 1;
-
-	Point3D GetObstacleLocation(int number)
-	{
-		return obstacleLocationArray[number];
-	}
-
-	int GetNextObstacleLocation()
-	{
-		currentObstacle = currentObstacle + obstacleDirection;
-		if (currentObstacle ==1)
-		{
-			if (currentObstacle < obstacleMaxSize)
-			{
-				return obstacleLocationArray[currentObstacle];
-			}
-			else
-			{
-				obstacleDirection =-1;
-				currentObstacle = currentObstacle + obstacleDirection;
-			}
-		}
-		else
-		{
-			if (obstacleDirection == 1)
-			{
-				return obstacleLocationArray[currentObstacle];
-			}
-			else
-			{
-				obstacleDirection =1;
-				currentObstacle = currentObstacle + obstacleDirection;
-			}
-		}
-
-		targetLocation = aimanager->GetObstacleLocation(currentObstacle);
-
-	}
 }
 
 void AiAvoid::Exit(AiManager* aimanager)
@@ -261,47 +221,7 @@ void AiFollowPath::Execute(AiManager* aimanager)
 #endif
 
 	// put code here
-	int wayPointMaxSize = aimanager->GetWayPointCount();
-	int currentWayPoint = 0;
-	Point3D targetLocation;
-	int wayPointDirection = 1;
-
-	Point3D GetWayPointLocation(int number)
-	{
-		return wayPointArray[number];
-	}
-
-	int GetNextWayPoint()
-	{
-		currentWayPoint = currentWayPoint + wayPointDirection;
-		if (currentWayPoint ==1)
-		{
-			if (currentWayPoint < wayPointMaxSize)
-			{
-				return wayPointArray[currentWayPoint];
-			}
-			else
-			{
-				wayPointDirection =-1;
-				currentWayPoint = currentWayPoint + wayPointDirection;
-			}
-		}
-		else
-		{
-			if (wayPointDirection == 1)
-			{
-				return waypointArray[currentWaypoint];
-			}
-			else
-			{
-				wayPointDirection =1;
-				currentWayPoint = currentWayPoint + wayPointDirection;
-			}
-		}
-
-		targetLocation = aimanager->GetWayPointLocation(currentWayPoint);
-
-	}
+	
 }
 
 void AiFollowPath::Exit(AiManager* aimanager)
