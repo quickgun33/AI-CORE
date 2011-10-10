@@ -220,7 +220,7 @@ public:
 	Outputs: N/A
 	General Operation: Used to set currentStateName
 	*/
-	void SetName(char n) {currentStateName = n;}
+	void SetName(char n) { currentStateName = n;}
 
 	/*void SetVelocity(int vel)
 	Inputs: int vel
@@ -398,10 +398,10 @@ public:
 	}
 	
 	void AddWayPoint(Point3D wayPoint);
-	// void AddWayPoint(Vector3D wayPoint)
+	// void AddWayPoint(Vector3D wayPointArray)
 	/*	Inputs: Vector3D waypoint
 		Outputs: N/A
-		General Operation: Adds a waypoint (x,y,z) to the WayPointArray*/
+		General Operation: Adds a waypoint (x,y,z) to the wayPointArray*/
 
 	void AddAvoidObstacle(Point3D obstacleLocation);
 	// AddAvoidObstacle(Vector3d obstacleLocation)
@@ -421,11 +421,11 @@ public:
 	}
 
 	//Gets the next obstacleLocation and determines what to do with it
-	int GetNextObstacleLocation()
+	int GetNextObstacle()
 	{
 		int obstacleMaxSize = GetObstacleCount();
 		int currentObstacle = 0;
-		Point3D targetLocation;
+		Point3D avoidLocation;
 		int obstacleDirection = 1;
 
 		currentObstacle = currentObstacle + obstacleDirection;
@@ -454,7 +454,7 @@ public:
 			}
 		}
 
-		targetLocation = GetObstacleLocation(currentObstacle);
+		avoidLocation = GetObstacleLocation(currentObstacle);
 	}
 
 	int GetWayPointCount()
@@ -503,6 +503,30 @@ public:
 
 		targetLocation = GetWayPointLocation(currentWayPoint);
 
+	}
+
+	void MoveToNextWayPoint(Point3D nextPoint)
+	{
+    if(nextPoint.z == location.z)
+    {
+        if((location.x - nextPoint.x) < 0)
+            SetFacing(180);
+        else
+            SetFacing(0);
+    }
+    else
+    {
+        if((location.z - nextPoint.z) < 0)
+            SetFacing(270);
+        else
+            SetFacing(90);
+    }
+    
+    SetVelocity(10);
+    UpdateLocation();
+    
+    if(location == nextPoint)
+        GetNextWayPoint();
 	}
 
 	/*~AiManager(void)

@@ -229,7 +229,8 @@ void AiFollowPath::Execute(AiManager* aimanager)
 
 #endif
 
-	// put code here	
+	// put code here
+	aimanager->MoveToNextWayPoint();
 }
 void AiFollowPath::Exit(AiManager* aimanager)
 {
