@@ -30,10 +30,14 @@ void AiChase::Execute(AiManager* aimanager)
 	cout << "AiChase::Execute()\n";
 #endif
 
+	aimanager->SetName(char('Ch'));
 	//if the player is visible, increase velocity to 2 in the player direction
 	//else go back to exploring
 	if(aimanager->GetLocation() != aimanager->GetPlayerPos() && aimanager->GetVisible() == true)
-		aimanager->SetVelocity(2);
+		//update bot velocity
+		aimanager->SetVelocity(20);
+		//update bot location
+		aimanager->UpdateLocation();
 	else
 		aimanager->GetFSM()->ChangeState(AiExplore::Instance());
 
@@ -58,6 +62,9 @@ void AiExplore::Enter(AiManager* aimanager)
 
 {
 	// put code here
+	{
+		cout << "Woot. We did it!\n";
+	}
 #ifdef _DEBUG_
 	cout << "AiExplore::Enter()\n";
 #endif
@@ -68,8 +75,13 @@ void AiExplore::Execute(AiManager* aimanager)
 #ifdef _DEBUG_
 		cout << "AiExplore::Execute()\n";
 #endif
+		aimanager->SetName(char('Ex'));
+		//run wall avoidance
 		aimanager->WallAvoid();
-		aimanager->SetVelocity(1);
+		//set bot velocity
+		aimanager->SetVelocity(10);
+		//update bot location
+		aimanager->UpdateLocation();
 
 		//if player is seen, change to Chase or Evade based on aggressive
 		if(aimanager->GetVisible() == true)
@@ -77,7 +89,6 @@ void AiExplore::Execute(AiManager* aimanager)
 				aimanager->GetFSM()->ChangeState(AiChase::Instance());
 			else
 				aimanager->GetFSM()->ChangeState(AiEvade::Instance());
-
 }
 void AiExplore::Exit(AiManager* aimanager)
 {
@@ -114,18 +125,16 @@ void AiEvade::Execute(AiManager* aimanager)
 	//else go back to exploring
 	if(aimanager->GetLocation() != aimanager->GetPlayerPos() && aimanager->GetVisible() == true)
 	{
+		aimanager->SetName(char('Ev'));
+		//run wall avoidance
+		aimanager->WallAvoid();
 		//set velocity negative to player direction
-		aimanager->SetVelocity(-2);
-		//run custom wall avoidance for when it hits a wall running away
-		if(aimanager->GetMagB() == 0)
-		{
-			if(aimanager->GetMagL() > 0)
-				aimanager->SetFacing(270);
-			else if(aimanager->GetMagR() > 0)
-				aimanager->SetFacing(90);
-		}
+		aimanager->SetVelocity(-20);
+		//update bot's location
+		aimanager->UpdateLocation();
 	}
 	else
+
 		aimanager->GetFSM()->ChangeState(AiExplore::Instance());
 
 }
@@ -220,10 +229,8 @@ void AiFollowPath::Execute(AiManager* aimanager)
 
 #endif
 
-	// put code here
-	
+	// put code here	
 }
-
 void AiFollowPath::Exit(AiManager* aimanager)
 {
 	// put code here
