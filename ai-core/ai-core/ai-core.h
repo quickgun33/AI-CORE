@@ -100,11 +100,7 @@ private:
 	// Used to switch between Explore and Chase/Evade states.
 	bool visible;
 
-	//
-	// "Smart" Arrays to hold way points and obtacles to avoid
-	//
-	vector<Point3D> wayPointArray;
-	vector<Point3D> obstacleLocationArray;
+	
 
 
 	
@@ -141,6 +137,12 @@ public:
 	void SetStateFollowPath(void); // Set bot state to AiFollowPath
 
 	StateMachine<AiManager>*  GetFSM()const{return m_pStateMachine;}
+
+	//
+	// "Smart" Arrays to hold way points and obtacles to avoid
+	//
+	vector<Point3D> wayPointArray;
+	vector<Point3D> obstacleLocationArray;
 
 	// Public member functions to return bot information
 	// fetch aimanager attributes
@@ -433,7 +435,7 @@ public:
 		{
 			if (currentObstacle < obstacleMaxSize)
 			{
-				return obstacleLocationArray[currentObstacle];
+				return AiManager::GetObstacleLocation(currentObstacle);
 			}
 			else
 			{
@@ -445,7 +447,7 @@ public:
 		{
 			if (obstacleDirection == 1)
 			{
-				return obstacleLocationArray[currentObstacle];
+				return AiManager::GetObstacleLocation(currentObstacle);
 			}
 			else
 			{
@@ -480,7 +482,7 @@ public:
 		{
 			if (currentWayPoint < wayPointMaxSize)
 			{
-				return wayPointArray[currentWayPoint];
+				return AiManager::GetWayPointLocation(currentWayPoint);
 			}
 			else
 			{
@@ -492,7 +494,7 @@ public:
 		{
 			if (wayPointDirection == 1)
 			{
-				return waypointArray[currentWaypoint];
+				return AiManager::GetWayPointLocation(currentWayPoint);
 			}
 			else
 			{
@@ -525,7 +527,7 @@ public:
     SetVelocity(10);
     UpdateLocation();
     
-    if(location == nextPoint)
+    if(location.x == nextPoint.x && location.z == nextPoint.z)
         GetNextWayPoint();
 	}
 
