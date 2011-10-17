@@ -31,17 +31,22 @@ void AiChase::Execute(AiManager* aimanager)
 #endif
 
 	aimanager->SetName(char('Ch'));
-	//if the player is visible, increase velocity to 2 in the player direction
-	//else go back to exploring
-	if(aimanager->GetLocation() != aimanager->GetPlayerPos() && aimanager->GetVisible() == true)
-		//update bot velocity
-		aimanager->SetVelocity(20);
-		//update bot location
-		aimanager->UpdateLocation();
-	else
-		aimanager->GetFSM()->ChangeState(AiExplore::Instance());
-
+    
+    //if the player is visible, increase velocity to 2 in the player direction
+    //else go back to exploring
+    if(aimanager->GetLocation() != aimanager->GetPlayerPos() && aimanager->GetVisible() == true)
+    {
+        //update bot velocity
+        aimanager->SetVelocity(20);
+        //update bot location
+        aimanager->UpdateLocation();
+    }
+    else
+    {
+        aimanager->GetFSM()->ChangeState(AiExplore::Instance());
+    }
 }
+
 void AiChase::Exit(AiManager* aimanager)
 {
 	// put code here
@@ -77,7 +82,7 @@ void AiExplore::Execute(AiManager* aimanager)
 #endif
 		aimanager->SetName(char('Ex'));
 		//run wall avoidance
-		aimanager->WallAvoid();
+		aimanager->WallAvoid(char('Ex'));
 		//set bot velocity
 		aimanager->SetVelocity(10);
 		//update bot location
@@ -127,7 +132,7 @@ void AiEvade::Execute(AiManager* aimanager)
 	{
 		aimanager->SetName(char('Ev'));
 		//run wall avoidance
-		aimanager->WallAvoid();
+		aimanager->WallAvoid(char('Ev'));
 		//set velocity negative to player direction
 		aimanager->SetVelocity(-20);
 		//update bot's location

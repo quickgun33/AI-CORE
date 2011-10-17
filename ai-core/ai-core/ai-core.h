@@ -423,7 +423,7 @@ public:
 	}
 
 	//Gets the next obstacleLocation and determines what to do with it
-	int GetNextObstacle()
+	Point3D GetNextObstacle()
 	{
 		int obstacleMaxSize = GetObstacleCount();
 		int currentObstacle = 0;
@@ -470,7 +470,7 @@ public:
 	}
 
 	//Gets the next vector and determines what to do with it
-	int GetNextWayPoint()
+	Point3D GetNextWayPoint()
 	{
 		int wayPointMaxSize = GetWayPointCount();
 		int currentWayPoint = 0;
