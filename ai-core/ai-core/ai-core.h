@@ -220,7 +220,7 @@ public:
 	Outputs: N/A
 	General Operation: Used to set currentStateName
 	*/
-	void SetName(char n) { currentStateName = n;}
+	void SetName(char n) { char currentStateName = n;}
 
 	/*void SetVelocity(int vel)
 	Inputs: int vel
@@ -255,9 +255,9 @@ public:
 	Outputs: N/A
 	General Operation: Runs a wall avoidance algorithm; turns
 					   right when able and turns around when stuck*/
-	void WallAvoid()
+	void WallAvoid(char currentStateName)
 	{
-		if(currentStateName == 'Ex')
+		if(currentStateName = 'Ex')
 		{
 			if(magR > 0)
 			{
